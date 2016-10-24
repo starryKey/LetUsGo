@@ -9,6 +9,6 @@
 #import <Foundation/Foundation.h>
 #import "SMKSingleTon.h"
 @interface TestSingleTon : NSObject
-
+//单例的快速实现
 SMKSingletonH(object)
 @end
