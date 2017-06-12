@@ -12,8 +12,10 @@
 #import "PublicKit.h"
 #import "TestSingleTon.h"
 #import "LeeRViewController.h"
+#import "ANSThreadViewController.h"
 @interface ViewController ()
 @property (nonatomic, strong)UIButton *TestBtnA;
+@property (nonatomic, strong)UIButton *ThreadBtn;
 @end
 
 @implementation ViewController
@@ -55,6 +57,7 @@
     // Called after the view has been loaded. For view controllers created in code, this is after -loadView. For view controllers unarchived from a nib, this is after the view is set.
     NSLog(@"viewDidLoad");
     [self.view addSubview:self.TestBtnA];
+    [self.view addSubview:self.ThreadBtn];
 }
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:YES];
@@ -93,5 +96,20 @@
 - (void)btnAAction:(UIButton *)btn{
     LeeRViewController *leeRVC = [[LeeRViewController alloc]init];
     [self.navigationController pushViewController:leeRVC animated:YES];
+}
+- (UIButton *)ThreadBtn{
+    if (_ThreadBtn == nil) {
+        _ThreadBtn = [[UIButton alloc]initWithFrame:CGRectMake(200, 400, 80, 80)];
+    }
+    [_ThreadBtn setTitle:@"操作线程" forState:UIControlStateNormal];
+    _ThreadBtn.layer.cornerRadius = 40;
+    _ThreadBtn.backgroundColor = [UIColor redColor];
+    [_ThreadBtn addTarget:self action:@selector(btnThreadAction:) forControlEvents:UIControlEventTouchUpInside];
+    return _ThreadBtn;
+}
+- (void)btnThreadAction:(UIButton *)btn{
+    ANSThreadViewController *NSThVC = [[[NSBundle mainBundle]loadNibNamed:@"ANSThreadViewController" owner:self options:nil] lastObject];
+//    [self.navigationController presentViewController:NSThVC animated:YES completion:nil];
+    [self.navigationController pushViewController:NSThVC animated:YES];
 }
 @end

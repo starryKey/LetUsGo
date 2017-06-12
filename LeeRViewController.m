@@ -8,6 +8,8 @@
 
 #import "LeeRViewController.h"
 #import "ViewController.h"
+#import "NSThreadViewController.h"
+
 @interface LeeRViewController ()
 
 @end
@@ -16,11 +18,11 @@
 
 //invoked唤起
 //＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊UIView的生存周期＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊//
-- (void)loadView{
-    
-    NSLog(@"loadView-B");
-    // This is where subclasses should create their custom view hierarchy if they aren't using a nib. Should never be called directly.
-}
+//- (void)loadView{
+//    
+//    NSLog(@"loadView-B");
+//    // This is where subclasses should create their custom view hierarchy if they aren't using a nib. Should never be called directly.
+//}
 - (void)loadViewIfNeeded{
     [super loadViewIfNeeded];
     NSLog(@"loadViewIfNeeded-B");
@@ -36,6 +38,7 @@
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.view.backgroundColor = [UIColor redColor];
     // Called after the view has been loaded. For view controllers created in code, this is after -loadView. For view controllers unarchived from a nib, this is after the view is set.
     NSLog(@"hello - B");
 }
@@ -184,6 +187,11 @@
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     //处理内存警告时，可能会释放view self.view = nil
+    
+}
+- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
+    NSThreadViewController *VC = [[NSThreadViewController alloc]init];
+    [self.navigationController pushViewController:VC animated:YES];
     
 }
 
